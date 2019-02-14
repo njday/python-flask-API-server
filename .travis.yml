@@ -29,8 +29,8 @@ script:
 
 after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - docker tag my_docker_reposetory/swagger_server my_docker_reposetory/swagger_server
-  - docker push my_docker_reposetory/swagger_server
+  - docker tag travis-python-flask-image/swagger_server travis-python-flask-image/swagger_server
+  - docker push travis-python-flask-image/swagger_server
   
 env:
   global:
