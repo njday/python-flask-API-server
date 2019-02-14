@@ -4,7 +4,7 @@ info:
   description: "My simple API to learn how to write OpenAPI specifications"
   version: "1.0.0"
   title: "Simple API"
-host: "localhost"
+host: "localhost:8080"
 basePath: "/openapi101"
 schemes:
 - "http"
