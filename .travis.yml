@@ -19,15 +19,15 @@ before_script:
 script:
 - nosetests
 - docker build -t python-flask-server/swagger_server .
-- docker run --name example_api -d -t -p 127.0.0.1:8080:8080 my/swagger_server
+- docker run --name example_api -d -t -p 127.0.0.1:8080:8080 python-flask-server/swagger_server
 - docker ps
 - count=0 && until $(curl --output /dev/null --silent --head --fail http://localhost:8080);
   do printf '.' && sleep 3 && count=$((count+1)) && if [ $count -gt 5 ]; then break;
   fi; done
 after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
-- docker tag my_docker_reposetory/swagger_server my_docker_reposetory/swagger_server
-- docker push my_docker_reposetory/swagger_server
+- docker tag travis-python-flask-image/swagger_server travis-python-flask-image/swagger_server
+- docker push travis-python-flask-image/swagger_server
 env:
   global:
   - secure: FQ/4abx6Wo/stGvOgniz1uPysBiP6T/cNf3hhmtEqoDQ8vNF0ow7IbnUgapoeLzBkfbs4tLDNELQjGJpKmd/Ahr2X/PN/58Fbv6nTce3moOKqyaMHz51v/mJC4mnVBN4cpOjy/kNC7m1iHpx2C6KXpykVXFQxEtDWT1ZfIhzFSrErEoXyphU4AyZ2DDKHCedxQwJD6VxLTWYsI7syDzBN4BhyTsI6H2ca7oyUXbPry94emdLratGpQLdSPYf9vxvZeaz9FibHm7VcOxxPIvOLJoUiF1OQVWgG4oRIybU7UKVxyJHrWW1RDG01o9NkvOt+5/sCzEPhx0c1uI+18ILywjT9+JiLzNqGCw0lJwGghdZ4QHyHtmCesRa4yTyFdm1nVYMUewCzrHFXktZDlHnt/Ia0cXpum6ePEKHJTRCS+C89+bHiIrGQnhQoIUd3Xf2irZDyukbuuzh0lc89dTmWqg6sgt3JKpKIiIlhlaNTZSDX/hyHRIXItWAPbE2s4/CluX63c6uFASWTKYAmJy/392ZTA7ilPI74xU4WUrzZl0UOUth0Ecl92Vx8v/DbD9aEOAXGX9dIcm78v5MUIbcse36j5T3iqhlDT4Hz3AE3SexBq5m/MN8RvIDwL6xtTs9sq97K+mPNrtMfGlx99CdbrcYGbhMMOxdD7/6V2Rk89I=
