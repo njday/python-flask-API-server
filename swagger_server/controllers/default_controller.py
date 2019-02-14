@@ -32,6 +32,7 @@ def persons_post(person=None):  # noqa: E501
 
     :rtype: None
     """
+    #handle the json
     # if connexion.request.is_json:
     #     person = Person.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
