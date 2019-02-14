@@ -22,7 +22,7 @@ script:
 <<<<<<< HEAD
 - docker run --name example_api -d -t -p 127.0.0.1:8080:8080 python-flask-server/swagger_server
 =======
-- docker run --name example_api -d -t -p 127.0.0.1:8080:8080 my/swagger_server
+- docker run --name example_api -d -t -p 127.0.0.1:8080:8080 python-flask-server/swagger_server
 >>>>>>> 0d67be5a7e9b752197b91d1e082c35df15590856
 - docker ps
 - count=0 && until $(curl --output /dev/null --silent --head --fail http://localhost:8080);
@@ -34,8 +34,8 @@ after_success:
 - docker tag travis-python-flask-image/swagger_server travis-python-flask-image/swagger_server
 - docker push travis-python-flask-image/swagger_server
 =======
-- docker tag my_docker_reposetory/swagger_server my_docker_reposetory/swagger_server
-- docker push my_docker_reposetory/swagger_server
+- docker tag travis-python-flask-image/swagger_server travis-python-flask-image/swagger_server
+- docker push travis-python-flask-image/swagger_server
 >>>>>>> 0d67be5a7e9b752197b91d1e082c35df15590856
 env:
   global:
