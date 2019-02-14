@@ -32,8 +32,21 @@ def persons_post(person=None):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        person = Person.from_dict(connexion.request.get_json())  # noqa: E501
+    # if connexion.request.is_json:
+    #     person = Person.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def persons_username_delete(username):  # noqa: E501
+    """persons_username_delete
+
+     # noqa: E501
+
+    :param username: the persons name
+    :type username: str
+
+    :rtype: None
+    """
     return 'do some magic!'
 
 

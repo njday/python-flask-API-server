@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   description: "My simple API to learn how to write OpenAPI specifications"
-  version: "1.0.0"
+  version: "2.0.0"
   title: "Simple API"
 host: "localhost:8080"
 basePath: "/openapi101"
@@ -109,6 +109,24 @@ paths:
           description: "a persons"
           schema:
             $ref: "#/definitions/Person"
+        404:
+          description: "This person does not exist"
+        500:
+          description: "An unexpected error occured."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    delete:
+      operationId: "persons_username_delete"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "the persons name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Person deleted"
         404:
           description: "This person does not exist"
         500:

@@ -42,6 +42,17 @@ class TestDefaultController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
+    def test_persons_username_delete(self):
+        """Test case for persons_username_delete
+
+        
+        """
+        response = self.client.open(
+            '/openapi101/persons/{username}'.format(username='username_example'),
+            method='DELETE')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
     def test_persons_username_friends_get(self):
         """Test case for persons_username_friends_get
 
