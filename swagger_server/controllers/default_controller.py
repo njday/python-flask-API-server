@@ -5,9 +5,11 @@ from swagger_server.models.error import Error  # noqa: E501
 from swagger_server.models.person import Person  # noqa: E501
 from swagger_server.models.persons import Persons  # noqa: E501
 from swagger_server import util
+from flask import request, abort, Response, jsonify
 import json
 
-people = Persons()
+
+people=[]
 
 
 def persons_get(pageSize=None, pageNumber=None):  # noqa: E501
@@ -24,8 +26,10 @@ def persons_get(pageSize=None, pageNumber=None):  # noqa: E501
     """
     message = "No people exist"
 
-    if people.__sizeof__() > 0:
-        message = people.items
+
+    if len(people)>0:
+        message= jsonify(items=people)
+
     return message
 
 
@@ -45,9 +49,8 @@ def persons_post(person=None):  # noqa: E501
     # handle the json
     if connexion.request.is_json:
         person = Person.from_dict(connexion.request.get_json())  # noqa: E501
-        if person[2] != "":
-            people.items([person])
-            message = "Created person: " + person
+        people.append(person)
+        message=jsonify(item=person)
 
     return message
 

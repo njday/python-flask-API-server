@@ -129,7 +129,7 @@ class Person(Model):
             raise ValueError("Invalid value for `username`, length must be less than or equal to `64`")  # noqa: E501
         if username is not None and len(username) < 8:
             raise ValueError("Invalid value for `username`, length must be greater than or equal to `8`")  # noqa: E501
-        if username is not None and not re.search(r'[\\w\\d]{8,64}', username):  # noqa: E501
+        if username is not None and not re.search(r'[\w\d]{8,64}', username):  # noqa: E501
             raise ValueError("Invalid value for `username`, must be a follow pattern or equal to `/[\\w\\d]{8,64}/`")  # noqa: E501
 
         self._username = username
