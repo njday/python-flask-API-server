@@ -8,7 +8,7 @@ info:
 schemes: 
   - http
 host: simple.api
-basePath: /openapi101
+basePath: localhost:8080/openapi101
 paths:
   /persons:
     get:

@@ -1,5 +1,10 @@
 import connexion
 import six
+
+from swagger_server.models.error import Error  # noqa: E501
+from swagger_server.models.person import Person  # noqa: E501
+from swagger_server.models.persons import Persons  # noqa: E501
+from swagger_server import util
 from flask import request, abort, Response, jsonify
 import json
 
@@ -29,7 +34,7 @@ def persons_post(person=None):  # noqa: E501
     if connexion.request.is_json:
         person = Person.from_dict(connexion.request.get_json())  # noqa: E501
     persons_list.append(person)
-    return Response(mimetype='application/json', status=204)
+    return Response('person added!',mimetype='application/json', status=204)
     # return 'do some magic!'
 
 
@@ -43,7 +48,7 @@ def persons_username_delete(username):  # noqa: E501
     for person in persons_list:
         if (person.username == username):
             persons_list.remove(person)
-            return Response(mimetype='application/json', status=204)
+            return Response('Person deleted!', mimetype='application/json', status=204)
 
     return Response('person not found!', mimetype='text/plain', status=404)
 
@@ -62,6 +67,7 @@ def persons_username_get(username):  # noqa: E501
     # print(person.username)
     return 'person not found!'
 
+
 def persons_username_friends_get(username, pageSize=None, pageNumber=None):  # noqa: E501
     """Gets a person&#39;s friends
 
@@ -77,4 +83,3 @@ def persons_username_friends_get(username, pageSize=None, pageNumber=None):  # n
     :rtype: None
     """
     return 'do some magic!'
-
