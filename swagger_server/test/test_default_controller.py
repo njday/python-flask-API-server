@@ -17,12 +17,12 @@ class TestDefaultController(BaseTestCase):
     def test_persons_get(self):
         """Test case for persons_get
 
-        Return some persons
+        Gets some persons
         """
-        query_string = [('pageSize', 100),
+        query_string = [('pageSize', 56),
                         ('pageNumber', 56)]
         response = self.client.open(
-            '/openapi101/persons',
+            'openai/persons',
             method='GET',
             query_string=query_string)
         self.assert200(response,
@@ -31,37 +31,38 @@ class TestDefaultController(BaseTestCase):
     def test_persons_post(self):
         """Test case for persons_post
 
-        create a person
+        Creates a person
         """
         person = Person()
+        person.username = "username_example"
         response = self.client.open(
-            '/openapi101/persons',
+            '/persons',
             method='POST',
             data=json.dumps(person),
             content_type='application/json')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+        self.assertStatus(response, 204,
+                          'Response body is : ' + response.data.decode('utf-8'))
 
     def test_persons_username_delete(self):
         """Test case for persons_username_delete
 
-        
+        Deletes a persons
         """
         response = self.client.open(
-            '/openapi101/persons/{username}'.format(username='username_example'),
+            '/persons/{username}'.format(username='username_example'),
             method='DELETE')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+        self.assertStatus(response, 204,
+                          'Response body is : ' + response.data.decode('utf-8'))
 
     def test_persons_username_friends_get(self):
         """Test case for persons_username_friends_get
 
         Gets a person's friends
         """
-        query_string = [('pageSize', 100),
+        query_string = [('pageSize', 56),
                         ('pageNumber', 56)]
         response = self.client.open(
-            '/openapi101/persons/{username}/friends'.format(username='username_example'),
+            '/persons/{username}/friends'.format(username='username_example'),
             method='GET',
             query_string=query_string)
         self.assert200(response,
@@ -70,13 +71,23 @@ class TestDefaultController(BaseTestCase):
     def test_persons_username_get(self):
         """Test case for persons_username_get
 
-        gets specific person
+        Gets a person
         """
-        response = self.client.open(
-            '/openapi101/persons/{username}'.format(username='username_example'),
+        person = Person()
+        person.username = "username_example"
+        response1 = self.client.open(
+            '/persons',
+            method='POST',
+            data=json.dumps(person),
+            content_type='application/json')
+        self.assertStatus(response1, 204,
+                          'Response body is : ' + response1.data.decode('utf-8'))
+
+        response2 = self.client.open(
+            '/persons/{username}'.format(username='username_example'),
             method='GET')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+        self.assert200(response2,
+                       'Response body is : ' + response2.data.decode('utf-8'))
 
 
 if __name__ == '__main__':
