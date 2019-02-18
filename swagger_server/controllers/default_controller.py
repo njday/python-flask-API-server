@@ -5,6 +5,9 @@ from swagger_server.models.error import Error  # noqa: E501
 from swagger_server.models.person import Person  # noqa: E501
 from swagger_server.models.persons import Persons  # noqa: E501
 from swagger_server import util
+import json
+
+people = Persons()
 
 
 def persons_get(pageSize=None, pageNumber=None):  # noqa: E501
@@ -19,23 +22,34 @@ def persons_get(pageSize=None, pageNumber=None):  # noqa: E501
 
     :rtype: Persons
     """
-    return 'do some magic!'
+    message = "No people exist"
+
+    if people.__sizeof__() > 0:
+        message = people.items
+    return message
 
 
 def persons_post(person=None):  # noqa: E501
     """create a person
 
     send a person to be made # noqa: E501
-
     :param person: person to create
     :type person: dict | bytes
-
     :rtype: None
     """
-    #handle the json
-    # if connexion.request.is_json:
-    #     person = Person.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    message = "Could not create person: "
+    if person is None:
+        message = +"No person specified"
+
+    # if person == json.
+    # handle the json
+    if connexion.request.is_json:
+        person = Person.from_dict(connexion.request.get_json())  # noqa: E501
+        if person[2] != "":
+            people.items([person])
+            message = "Created person: " + person
+
+    return message
 
 
 def persons_username_delete(username):  # noqa: E501
