@@ -62,9 +62,9 @@
                             "raw": "{\n  \"firstName\": \"firstName\",\n  \"lastName\": \"lastName\",\n  \"username\": \"username\",\n  \"dateOfBirth\": \"2019-02-04\",\n  \"lastTimeOnline\": \"2019-02-04T16:11:51.858Z\"\n}"
                         },
                         "url": {
-                            "raw": "{{base_url}}/persons",
+                            "raw": "localhost:8080/openapi101/persons",
                             "host": [
-                                "{{base_url}}"
+                                "localhost:8080/openapi101"
                             ],
                             "path": [
                                 "persons"
@@ -116,9 +116,9 @@
                             "raw": ""
                         },
                         "url": {
-                            "raw": "{{base_url}}/persons?pageSize={{pageSize}}&pageNumber={{pageNumber}}",
+                            "raw": "localhost:8080/openapi101/persons?pageSize={{pageSize}}&pageNumber={{pageNumber}}",
                             "host": [
-                                "{{base_url}}"
+                                "localhost:8080/openapi101"
                             ],
                             "path": [
                                 "persons"
@@ -176,9 +176,9 @@
                             "raw": ""
                         },
                         "url": {
-                            "raw": "{{base_url}}/persons?pageSize={{pageSize}}&pageNumber={{pageNumber}}",
+                            "raw": "localhost:8080/openapi101/persons?pageSize={{pageSize}}&pageNumber={{pageNumber}}",
                             "host": [
-                                "{{base_url}}"
+                                "localhost:8080/openapi101"
                             ],
                             "path": [
                                 "persons"
@@ -230,9 +230,9 @@
                             "raw": ""
                         },
                         "url": {
-                            "raw": "{{base_url}}/persons/{{username}}",
+                            "raw": "localhost:8080/openapi101/persons/{{username}}",
                             "host": [
-                                "{{base_url}}"
+                                "localhost:8080/openapi101"
                             ],
                             "path": [
                                 "persons",
@@ -265,9 +265,9 @@
                         "header": [],
                         "body": {},
                         "url": {
-                            "raw": "{{base_url}}/persons/{{username}}",
+                            "raw": "localhost:8080/openapi101/persons/{{username}}",
                             "host": [
-                                "{{base_url}}"
+                                "localhost:8080/openapi101"
                             ],
                             "path": [
                                 "persons",
