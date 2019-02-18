@@ -1,0 +1,166 @@
+swagger: "2.0"
+
+
+info:
+  version: 1.0.0
+  title: Bennys simple API
+  description: This is my simple test API for learning purposes.
+
+schemes:
+  - https
+
+host: simple.api
+
+basePath: /openapi101
+
+paths:
+  /persons:
+    get:
+      summary: Gets some persons
+      description: Returns a list containing all persons.
+      parameters:
+        - $ref: "#/parameters/pageSize"
+        - $ref: "#/parameters/pageNumber"
+      responses:
+        200:
+          description: A list of Person.
+          schema:
+            $ref: "#/definitions/Persons"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+
+    post:
+      summary: Creates a person.
+      description: Adds a new person to the person list.
+
+      parameters:
+        - name: person
+          in: body
+          description: The person to create.
+          schema:
+            $ref: "#/definitions/Person"
+
+      responses:
+        204:
+          description: Person successfully created.
+        400:
+          description: Person could not be created.
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+
+  /persons/{username}:
+    parameters:
+      - name: username
+        in: path
+        required: true
+        description: The person's username
+        type: string
+
+    get:
+      summary: Gets a specific person
+      description: Returns a single person for its username.
+
+      parameters:
+        - $ref: "#/parameters/username"
+
+      responses:
+        200:
+          description: A person.
+          schema:
+            $ref: "#/definitions/Person"
+        404:
+          $ref: "#/responses/PersonDoesNotExistResponse"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+
+    delete:
+      summary: Deletes a person.
+      description: Delete a single person identified via its username.
+
+      parameters:
+        - $ref: "#/parameters/username"
+
+      responses:
+        204:
+          description: Person successfully deleted.
+        404:
+          $ref: "#/responses/PersonDoesNotExistResponse"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+
+definitions:
+  Person:  # A definition is simply a named 'schema object'.
+    required:
+      - username
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      username:
+        type: string
+        pattern: "[a-z0-9]{8,64}"
+        minLength: 8
+        maxLength: 64
+      dateOfBirth:
+        type: string
+        format: date
+      lastTimeOnline:
+        type: string
+        format: date-time
+        readOnly: true
+
+  Persons:
+    properties:
+      items:
+        type:   array
+        minItems: 10
+        maxItems: 100
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Person"  # A reference is only a path to another declaration within the OpenAPI specification.
+  
+  Error:
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+
+responses:
+  Standard500ErrorResponse:
+    description: An unexpected error occured.
+    schema:
+      $ref: "#/definitions/Error"
+
+  PersonDoesNotExistResponse:
+    description: This person does not exist.
+    schema:
+      $ref: "#/definitions/Error"
+
+parameters:
+  username:
+    name: username
+    in: path
+    required: true
+    description: The person's username
+    type: string
+  pageSize:
+    name: pageSize
+    in: query
+    description: Number of persons returned
+    type: integer
+    format: int32
+    minimum: 0
+    exclusiveMinimum: true
+    maximum: 100
+    exclusiveMaximum: false
+    multipleOf: 10
+  pageNumber:
+    name: pageNumber
+    in: query
+    description: Page number
+    type: integer

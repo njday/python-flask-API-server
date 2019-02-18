@@ -1,23 +1,23 @@
 ---
 swagger: "2.0"
 info:
-  description: "My simple API to learn how to write OpenAPI specifications"
-  version: "2.0.0"
-  title: "Simple API"
+  description: "This is my simple test API for learning purposes."
+  version: "1.0.0"
+  title: "Bennys simple API"
 host: "localhost:8080"
-basePath: "/openapi101"
 schemes:
+- "https"
 - "http"
 paths:
   /persons:
     get:
-      summary: "Return some persons"
-      description: "Returns a list containing many persons"
+      summary: "Gets some persons"
+      description: "Returns a list containing all persons."
       operationId: "persons_get"
       parameters:
       - name: "pageSize"
         in: "query"
-        description: "number of persons returned"
+        description: "Number of persons returned"
         required: false
         type: "integer"
         maximum: 100
@@ -33,7 +33,7 @@ paths:
         type: "integer"
       responses:
         200:
-          description: "a list of person"
+          description: "A list of Person."
           schema:
             $ref: "#/definitions/Persons"
         500:
@@ -42,52 +42,21 @@ paths:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
     post:
-      summary: "create a person"
-      description: "send a person to be made"
+      summary: "Creates a person."
+      description: "Adds a new person to the person list."
       operationId: "persons_post"
       parameters:
       - in: "body"
         name: "person"
-        description: "person to create"
+        description: "The person to create."
         required: false
         schema:
           $ref: "#/definitions/Person"
       responses:
-        200:
-          description: "OK"
-        500:
-          description: "An unexpected error occured."
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "swagger_server.controllers.default_controller"
-  /persons/{username}/friends:
-    get:
-      summary: "Gets a person's friends"
-      description: "Returns a list containing all persons. The list supports paging."
-      operationId: "persons_username_friends_get"
-      parameters:
-      - name: "username"
-        in: "path"
-        description: "the persons name"
-        required: true
-        type: "string"
-      - name: "pageSize"
-        in: "query"
-        description: "number of persons returned"
-        required: false
-        type: "integer"
-        maximum: 100
-        exclusiveMaximum: false
-        minimum: 0
-        exclusiveMinimum: true
-        multipleOf: 10
-        format: "int32"
-      - name: "pageNumber"
-        in: "query"
-        description: "Page number"
-        required: false
-        type: "integer"
-      responses:
+        204:
+          description: "Person successfully created."
+        400:
+          description: "Person could not be created."
         500:
           description: "An unexpected error occured."
           schema:
@@ -95,68 +64,80 @@ paths:
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
   /persons/{username}:
     get:
-      summary: "gets specific person"
-      description: "returns a single person for its username"
+      summary: "Gets a specific person"
+      description: "Returns a single person for its username."
       operationId: "persons_username_get"
       parameters:
       - name: "username"
         in: "path"
-        description: "the persons name"
+        description: "The person's username"
         required: true
         type: "string"
       responses:
         200:
-          description: "a persons"
+          description: "A person."
           schema:
             $ref: "#/definitions/Person"
         404:
-          description: "This person does not exist"
+          description: "This person does not exist."
+          schema:
+            $ref: "#/definitions/Error"
         500:
           description: "An unexpected error occured."
           schema:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
     delete:
+      summary: "Deletes a person."
+      description: "Delete a single person identified via its username."
       operationId: "persons_username_delete"
       parameters:
       - name: "username"
         in: "path"
-        description: "the persons name"
+        description: "The person's username"
         required: true
         type: "string"
       responses:
-        200:
-          description: "Person deleted"
+        204:
+          description: "Person successfully deleted."
         404:
-          description: "This person does not exist"
+          description: "This person does not exist."
+          schema:
+            $ref: "#/definitions/Error"
         500:
           description: "An unexpected error occured."
           schema:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
 definitions:
-  PagedPersonsv2:
-    allOf:
-    - $ref: "#/definitions/Persons"
-    - $ref: "#/definitions/Paging"
-  PagedPersons:
+  Person:
+    required:
+    - "username"
     properties:
-      items:
-        type: "array"
-        items:
-          $ref: "#/definitions/Person"
-      paging:
-        $ref: "#/definitions/Paging"
-  Paging:
-    properties:
-      totalItems:
-        type: "integer"
-      totalPages:
-        type: "integer"
-      pageSize:
-        type: "integer"
-      currentPage:
-        type: "integer"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      username:
+        type: "string"
+        minLength: 8
+        maxLength: 64
+        pattern: "[a-z0-9]{8,64}"
+        x-regex: "[a-z0-9]{8,64}"
+        x-modifiers: []
+      dateOfBirth:
+        type: "string"
+        format: "date"
+      lastTimeOnline:
+        type: "string"
+        format: "date-time"
+        readOnly: true
+    example:
+      firstName: "firstName"
+      lastName: "lastName"
+      lastTimeOnline: "2000-01-23T04:56:07.000+00:00"
+      dateOfBirth: "2000-01-23"
+      username: "username"
   Persons:
     properties:
       items:
@@ -668,55 +649,26 @@ definitions:
         lastTimeOnline: "2000-01-23T04:56:07.000+00:00"
         dateOfBirth: "2000-01-23"
         username: "username"
-  Person:
-    required:
-    - "username"
-    properties:
-      firstName:
-        type: "string"
-      lastName:
-        type: "string"
-      username:
-        type: "string"
-        minLength: 8
-        maxLength: 64
-        pattern: "[\\w\\d]{8,64}"
-        x-regex: "[\\\\w\\\\d]{8,64}"
-        x-modifiers: []
-      dateOfBirth:
-        type: "string"
-        format: "date"
-      lastTimeOnline:
-        type: "string"
-        format: "date-time"
-        readOnly: true
-    example:
-      firstName: "firstName"
-      lastName: "lastName"
-      lastTimeOnline: "2000-01-23T04:56:07.000+00:00"
-      dateOfBirth: "2000-01-23"
-      username: "username"
   Error:
+    required:
+    - "code"
+    - "message"
     properties:
       code:
         type: "string"
-        enum:
-        - "DBERR"
-        - "NTERR"
-        - "UNERR"
       message:
         type: "string"
 parameters:
   username:
     name: "username"
     in: "path"
-    description: "the persons name"
+    description: "The person's username"
     required: true
     type: "string"
   pageSize:
     name: "pageSize"
     in: "query"
-    description: "number of persons returned"
+    description: "Number of persons returned"
     required: false
     type: "integer"
     maximum: 100
@@ -734,5 +686,9 @@ parameters:
 responses:
   Standard500ErrorResponse:
     description: "An unexpected error occured."
+    schema:
+      $ref: "#/definitions/Error"
+  PersonDoesNotExistResponse:
+    description: "This person does not exist."
     schema:
       $ref: "#/definitions/Error"

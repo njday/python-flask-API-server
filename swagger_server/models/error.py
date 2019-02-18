@@ -65,12 +65,8 @@ class Error(Model):
         :param code: The code of this Error.
         :type code: str
         """
-        allowed_values = ["DBERR", "NTERR", "UNERR"]  # noqa: E501
-        if code not in allowed_values:
-            raise ValueError(
-                "Invalid value for `code` ({0}), must be one of {1}"
-                .format(code, allowed_values)
-            )
+        if code is None:
+            raise ValueError("Invalid value for `code`, must not be `None`")  # noqa: E501
 
         self._code = code
 
@@ -92,5 +88,7 @@ class Error(Model):
         :param message: The message of this Error.
         :type message: str
         """
+        if message is None:
+            raise ValueError("Invalid value for `message`, must not be `None`")  # noqa: E501
 
         self._message = message

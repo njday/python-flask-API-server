@@ -29,7 +29,7 @@
                                     "if (responseCode.code === 204) {",
                                     "    var numOfposts = _.parseInt(environment.numOfposts);",
                                     "    //If count is less than 5 set next to this",
-                                    "    if(count<numOfposts-1){",
+                                    "    if(count<5){",
                                     "        postman.setNextRequest(\"Creates a person\");",
                                     "    }else{",
                                     "        postman.setNextRequest(\"Gets some persons\");",
@@ -154,8 +154,12 @@
                                     "     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
                                     "});",
                                     "",
+                                    "//reset count variable",
+                                    "postman.setEnvironmentVariable(\"count\", 0);",
+                                    "",
                                     "var jsonData = JSON.parse(responseBody); //get the response and pase it into json",
-                                    "tests[\"Number of array items: \"+jsonData.items.length+ \" should be eqaual to pageSize:\"+numOfposts] = jsonData.items.length == 2; // test if the returned array size is equal to the numOfposts (5)",
+                                    "var numOfposts = _.parseInt(environment.numOfposts);",
+                                    "tests[\"Number of array items: \"+jsonData.items.length+ \" should be eqaual to pageSize:\"+numOfposts] = jsonData.items.length == 5; // test if the returned array size is equal to the numOfposts (5)",
                                     ""
                                 ],
                                 "type": "text/javascript"

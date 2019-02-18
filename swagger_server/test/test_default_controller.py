@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from __future__ import absolute_import
 
 from flask import json
@@ -14,53 +16,55 @@ class TestDefaultController(BaseTestCase):
 
     def test_persons_get(self):
         """Test case for persons_get
+
         Gets some persons
         """
         query_string = [('pageSize', 100),
                         ('pageNumber', 56)]
         response = self.client.open(
-            '/openapi101/persons',
+            '/persons',
             method='GET',
             query_string=query_string)
-        self.assert204(response,
+        self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
     def test_persons_post(self):
         """Test case for persons_post
+
         Creates a person.
         """
         person = Person()
-        person.username = "username_example"
+        person.username="username_example"
         response = self.client.open(
             '/persons',
             method='POST',
             data=json.dumps(person),
             content_type='application/json')
         self.assertStatus(response, 204,
-                          'Response body is : ' + response.data.decode('utf-8'))
+                       'Response body is : ' + response.data.decode('utf-8'))
 
     def test_persons_username_delete(self):
         """Test case for persons_username_delete
+
         Deletes a person.
         """
         response = self.client.open(
-            '/openapi101/persons/{username}'.format(username='username_example'),
+            '/persons/{username}'.format(username='username_example'),
             method='DELETE')
         self.assertStatus(response, 204,
-                          'Response body is : ' + response.data.decode('utf-8'))
+                       'Response body is : ' + response.data.decode('utf-8'))
 
     def test_persons_username_get(self):
         """Test case for persons_username_get
+
         Gets a specific person
         """
         response = self.client.open(
-            '/openapi101/persons/{username}'.format(username='username_example'),
+            '/persons/{username}'.format(username='username_example'),
             method='GET')
-        self.assert204(response,
+        self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
-
 
 if __name__ == '__main__':
     import unittest
-
     unittest.main()

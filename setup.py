@@ -18,10 +18,10 @@ REQUIRES = ["connexion"]
 setup(
     name=NAME,
     version=VERSION,
-    description="Simple API",
+    description="Bennys simple API",
     author_email="",
     url="",
-    keywords=["Swagger", "Simple API"],
+    keywords=["Swagger", "Bennys simple API"],
     install_requires=REQUIRES,
     packages=find_packages(),
     package_data={'': ['swagger/swagger.yaml']},
@@ -29,7 +29,7 @@ setup(
     entry_points={
         'console_scripts': ['swagger_server=swagger_server.__main__:main']},
     long_description="""\
-    My simple API to learn how to write OpenAPI specifications
+    This is my simple test API for learning purposes.
     """
 )
 
