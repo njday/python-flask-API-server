@@ -25,7 +25,7 @@ class TestDefaultController(BaseTestCase):
             'openai/persons',
             method='GET',
             query_string=query_string)
-        self.assert200(response,
+        self.assert204(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
     def test_persons_post(self):

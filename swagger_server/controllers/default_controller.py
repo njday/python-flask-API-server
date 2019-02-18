@@ -1,82 +1,66 @@
 import connexion
 import six
-
-from swagger_server.models.error import Error  # noqa: E501
-from swagger_server.models.person import Person  # noqa: E501
-from swagger_server.models.persons import Persons  # noqa: E501
-from swagger_server import util
 from flask import request, abort, Response, jsonify
 import json
 
-local_list_people = []
+persons_list = []
 
 
 def persons_get(pageSize=None, pageNumber=None):  # noqa: E501
-    """Return some persons
-
-    Returns a list containing many persons # noqa: E501
-
-    :param pageSize: number of persons returned
+    """Gets some persons
+    Returns a list containing all persons. # noqa: E501
+    :param pageSize: Number of persons returned
     :type pageSize: int
     :param pageNumber: Page number
     :type pageNumber: int
-
     :rtype: Persons
     """
-    message = "No people exist"
-    error = "500"
-
-    if len(local_list_people) > 0:
-        message = jsonify(items=local_list_people)
-        error = "204"
-
-    return Response(message, mimetype='application/json', status=204)
+    return jsonify(items=persons_list)
+    # return 'do some magic!'
 
 
 def persons_post(person=None):  # noqa: E501
-    """create a person
-
-    send a person to be made # noqa: E501
-    :param person: person to create
+    """Creates a person.
+    Adds a new person to the person list. # noqa: E501
+    :param person: The person to create.
     :type person: dict | bytes
     :rtype: None
     """
-    message = "Could not create person: "
-    error = "500"
-    if person is None:
-        message = +"No person specified"
-
-    # if person == json.
-    # handle the json
     if connexion.request.is_json:
         person = Person.from_dict(connexion.request.get_json())  # noqa: E501
-        local_list_people.append(person)
-        message = jsonify(item=person)
-        error = "204"
-
-    return Error(code=error, message=message)
+    persons_list.append(person)
+    return Response(mimetype='application/json', status=204)
+    # return 'do some magic!'
 
 
 def persons_username_delete(username):  # noqa: E501
-    """persons_username_delete
-
-     # noqa: E501
-
-    :param username: the persons name
+    """Deletes a person.
+    Delete a single person identified via its username. # noqa: E501
+    :param username: The person&#39;s username
     :type username: str
-
     :rtype: None
     """
-    message = str(username)
-    error = '500'
-    for x in local_list_people:
-        if local_list_people[x].username == username:
-            local_list_people.pop(x)
-            error = '204'
-            message = +" was deleted succesfully"
+    for person in persons_list:
+        if (person.username == username):
+            persons_list.remove(person)
+            return Response(mimetype='application/json', status=204)
 
-    return Response(message)
+    return Response('person not found!', mimetype='text/plain', status=404)
 
+
+def persons_username_get(username):  # noqa: E501
+    """Gets a specific person
+    Returns a single person for its username. # noqa: E501
+    :param username: The person&#39;s username
+    :type username: str
+    :rtype: Person
+    """
+    for person in persons_list:
+        if (person.username == username):
+            return person;
+
+    # print(person.username)
+    return 'person not found!'
 
 def persons_username_friends_get(username, pageSize=None, pageNumber=None):  # noqa: E501
     """Gets a person&#39;s friends
@@ -94,23 +78,3 @@ def persons_username_friends_get(username, pageSize=None, pageNumber=None):  # n
     """
     return 'do some magic!'
 
-
-def persons_username_get(username):  # noqa: E501
-    """gets specific person
-
-    returns a single person for its username # noqa: E501
-
-    :param username: the persons name
-    :type username: str
-
-    :rtype: Person
-    """
-    message = username + " could not be deleted"
-    error = '500'
-    for x in local_list_people:
-        if local_list_people[x].username == username:
-            local_list_people.pop(x)
-            error = '204'
-            message = username + " was deleted succesfully"
-
-    return Error(code=error, message=message)

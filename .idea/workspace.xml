@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4ac6200-5159-4f7a-8360-619f5f5af7a4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
       <change beforePath="$PROJECT_DIR$/swagger_server/controllers/default_controller.py" afterPath="$PROJECT_DIR$/swagger_server/controllers/default_controller.py" />
       <change beforePath="$PROJECT_DIR$/swagger_server/test/test_default_controller.py" afterPath="$PROJECT_DIR$/swagger_server/test/test_default_controller.py" />
     </list>
@@ -19,14 +18,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="default_controller.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="default_controller.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/swagger_server/controllers/default_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="50" lean-forward="false" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
-              <folding>
-                <element signature="e#0#16#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-332">
+              <caret line="1" column="10" lean-forward="false" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -51,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_default_controller.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_default_controller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/swagger_server/test/test_default_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="41" lean-forward="true" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+            <state relative-caret-position="-819">
+              <caret line="17" column="33" lean-forward="true" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
               <folding>
                 <element signature="e#17#55#0" expanded="true" />
               </folding>
@@ -77,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/swagger.yaml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+              <caret line="19" column="16" lean-forward="false" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -138,8 +135,8 @@
         <option value="$PROJECT_DIR$/swagger_server/__main__.py" />
         <option value="$PROJECT_DIR$/swagger_server/models/persons.py" />
         <option value="$PROJECT_DIR$/swagger_server/models/person.py" />
-        <option value="$PROJECT_DIR$/swagger_server/controllers/default_controller.py" />
         <option value="$PROJECT_DIR$/swagger_server/test/test_default_controller.py" />
+        <option value="$PROJECT_DIR$/swagger_server/controllers/default_controller.py" />
       </list>
     </option>
   </component>
@@ -574,7 +571,7 @@
     <entry file="file://$PROJECT_DIR$/swagger.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+          <caret line="19" column="16" lean-forward="false" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -605,23 +602,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/swagger_server/controllers/default_controller.py">
+    <entry file="file://$PROJECT_DIR$/swagger_server/test/test_default_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="50" lean-forward="false" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+        <state relative-caret-position="-819">
+          <caret line="17" column="33" lean-forward="true" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
           <folding>
-            <element signature="e#0#16#0" expanded="true" />
+            <element signature="e#17#55#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/swagger_server/test/test_default_controller.py">
+    <entry file="file://$PROJECT_DIR$/swagger_server/controllers/default_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="41" lean-forward="true" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-          <folding>
-            <element signature="e#17#55#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-332">
+          <caret line="1" column="10" lean-forward="false" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
