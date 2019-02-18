@@ -19,7 +19,7 @@ class TestDefaultController(BaseTestCase):
         query_string = [('pageSize', 100),
                         ('pageNumber', 56)]
         response = self.client.open(
-            '/persons',
+            '/openapi101/persons',
             method='GET',
             query_string=query_string)
         self.assert204(response,
@@ -44,7 +44,7 @@ class TestDefaultController(BaseTestCase):
         Deletes a person.
         """
         response = self.client.open(
-            '/persons/{username}'.format(username='username_example'),
+            '/openapi101/persons/{username}'.format(username='username_example'),
             method='DELETE')
         self.assertStatus(response, 204,
                           'Response body is : ' + response.data.decode('utf-8'))
@@ -54,7 +54,7 @@ class TestDefaultController(BaseTestCase):
         Gets a specific person
         """
         response = self.client.open(
-            '/persons/{username}'.format(username='username_example'),
+            '/openapi101/persons/{username}'.format(username='username_example'),
             method='GET')
         self.assert204(response,
                        'Response body is : ' + response.data.decode('utf-8'))
